@@ -1,0 +1,32 @@
+﻿@using WH.RACEDAY.CORE.VIEWMODELS.CUSTOMER;
+@{
+    ViewBag.Title = "CUSTOMER";
+
+    var customers = (CustomerList)ViewData["customers"];
+}
+
+
+
+<div class="row">
+    <h4>TOTAL BET:</h4>
+    <h3>@customers.TotalBets</h3>
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Customer name</th>
+                <th>Bets</th>
+                <th>At Risk</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var customer in customers.Customers)
+            {
+                <tr>
+                    <td>@customer.Name</td>
+                    <td>@customer.Bet</td>
+                    <td>@customer.isAtRisk</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

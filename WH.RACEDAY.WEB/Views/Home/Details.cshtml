@@ -1,0 +1,29 @@
+﻿@using WH.RACEDAY.CORE.VIEWMODELS.RACE;
+@{
+    ViewBag.Title = "RACE DETAILS";
+    var details = (RaceDetails)ViewData["raceDetails"];
+}
+
+<div class="row">
+    <h4>TOTAL BET:</h4><h3> @details.TotalBets</h3>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Horse Name</th>
+                <th>Bet</th>
+                <th>Payout</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var detail in details.Horses)
+            {
+                <tr>
+                    <td>@detail.Name</td>
+                    <td>@detail.Bets</td>
+                    <td>@detail.Payout</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a href=@Url.Action("Index","Home") class="btn btn-info">BACK</a>
+</div>

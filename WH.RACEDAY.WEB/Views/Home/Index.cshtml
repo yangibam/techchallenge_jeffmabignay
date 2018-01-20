@@ -1,0 +1,32 @@
+﻿@using WH.RACEDAY.CORE.ENTITIES.RACE;
+
+@{
+    ViewBag.Title = "RACES";
+
+    var races = (IEnumerable<Race>)ViewData["races"];
+}
+
+<div class="row">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Start</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var race in races)
+            {
+                <tr>
+                    <td>@race.Name</td>
+                    <td>@race.Start</td>
+                    <td>@race.Status</td>
+                    <td><a href=@Url.Action("Details","Home", new { id = race.ID })>DETAILS</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
