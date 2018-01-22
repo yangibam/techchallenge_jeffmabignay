@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.2.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="RestSharp, Version=106.2.1.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
       <HintPath>..\packages\RestSharp.106.2.1\lib\net452\RestSharp.dll</HintPath>
     </Reference>
@@ -39,6 +42,7 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.4.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
     </Reference>
@@ -57,10 +61,10 @@
     <Compile Include="CORE\ENTITIES\RACE\Horse.cs" />
     <Compile Include="CORE\ENTITIES\RACE\Race.cs" />
     <Compile Include="CORE\QUERIES\RACE\GetCustomerDetailsQuery.cs" />
-    <Compile Include="CORE\VIEWMODELS\CUSTOMER\CustomerDetails.cs" />
-    <Compile Include="CORE\VIEWMODELS\CUSTOMER\CustomerList.cs" />
-    <Compile Include="CORE\VIEWMODELS\RACE\HorseDetails.cs" />
-    <Compile Include="CORE\VIEWMODELS\RACE\RaceDetails.cs" />
+    <Compile Include="CORE\VIEWMODELS\CUSTOMER\CustomerViewModel.cs" />
+    <Compile Include="CORE\VIEWMODELS\CUSTOMER\CustomerListViewModel.cs" />
+    <Compile Include="CORE\VIEWMODELS\RACE\HorseViewModel.cs" />
+    <Compile Include="CORE\VIEWMODELS\RACE\RaceDetailsViewModel.cs" />
     <Compile Include="CORE\INTERFACES\ICommandHandler.cs" />
     <Compile Include="CORE\INTERFACES\IQueryHandler.cs" />
     <Compile Include="CORE\QUERIES\RACE\GetBetListQuery.cs" />

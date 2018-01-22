@@ -8,7 +8,7 @@ using WH.RACEDAY.CORE.VIEWMODELS.CUSTOMER;
 
 namespace WH.RACEDAY.CORE.QUERIES.CUSTOMER
 {
-    public class GetCustomerDetailsQuery : IQuery<CustomerList>
+    public class GetCustomerDetailsQuery : IQuery<CustomerListViewModel>
     {
     }
 }

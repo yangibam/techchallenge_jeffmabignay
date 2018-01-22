@@ -8,7 +8,7 @@ using WH.RACEDAY.CORE.VIEWMODELS.RACE;
 
 namespace WH.RACEDAY.CORE.QUERIES.RACE
 {
-    public class GetRaceDetailsQuery:IQuery<RaceDetails>
+    public class GetRaceDetailsQuery:IQuery<RaceDetailsViewModel>
     {
         public int ID { get; set; }
     }

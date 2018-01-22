@@ -22,7 +22,7 @@ namespace WH.RACEDAY.WEB.Controllers
         // GET: Customer
         public ActionResult Index()
         {
-            var customers = this.queryProcessor.Execute<CustomerList>(new GetCustomerDetailsQuery());
+            var customers = this.queryProcessor.Execute<CustomerListViewModel>(new GetCustomerDetailsQuery());
 
             ViewData["customers"] = customers;
 

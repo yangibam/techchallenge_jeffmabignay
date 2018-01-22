@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WH.RACEDAY.CORE.ENTITIES.RACE;
 using WH.RACEDAY.CORE.INTERFACES;
 using WH.RACEDAY.CORE.QUERIES.RACE;
 using WH.RACEDAY.CORE.VIEWMODELS.RACE;
 using WH.RACEDAY.DAL.INTERFACES;
 
+
 namespace WH.RACEDAY.RULE.QUERYHANDLER.RACE
 {
-    public class GetRaceDetailsQueryHandler : IQueryHandler<GetRaceDetailsQuery, RaceDetails>
+    public class GetRaceDetailsQueryHandler : IQueryHandler<GetRaceDetailsQuery, RaceDetailsViewModel>
     {
         private readonly IRaceRepository raceRepository;
 
@@ -20,16 +18,16 @@ namespace WH.RACEDAY.RULE.QUERYHANDLER.RACE
             this.raceRepository = raceRepository;
         }
 
-        public RaceDetails Handle(GetRaceDetailsQuery query)
+        public RaceDetailsViewModel Handle(GetRaceDetailsQuery query)
         {
             var race = this.raceRepository.GetRace().Where(r => r.ID == query.ID).FirstOrDefault();
             var bets = this.raceRepository.GetBet().Where(b => b.RaceId == query.ID);
 
-            var details = new RaceDetails();
+            var details = new RaceDetailsViewModel();
 
             details.TotalBets = bets.Sum(b => b.Stake);
 
-            var horses = new List<HorseDetails>();
+            var horses = new List<HorseViewModel>();
 
 
             foreach(var horse in race.Horses)
@@ -37,14 +35,15 @@ namespace WH.RACEDAY.RULE.QUERYHANDLER.RACE
                 var horseBet = bets.Where(b => b.HorseId == horse.ID).Sum(s => s.Stake);
                 var payout = horseBet * horse.Odds;
 
-                horses.Add(new HorseDetails { ID = horse.ID, Name = horse.Name, Bets = horseBet, Odds = horse.Odds, Payout = payout });
-
+                horses.Add(new HorseViewModel { ID = horse.ID, Name = horse.Name, Bets = horseBet, Odds = horse.Odds, Payout = payout });
             }
 
             details.Horses = horses;
 
             return details;
         }
+
+        
 
         
     }

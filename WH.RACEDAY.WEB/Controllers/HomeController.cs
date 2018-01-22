@@ -13,12 +13,10 @@ namespace WH.RACEDAY.WEB.Controllers
     public class HomeController : Controller
     {
         private readonly IQueryProcessor queryProcessor;
-        private readonly ICommandProcessor commandProcessor;
 
-        public HomeController(IQueryProcessor queryProcessor, ICommandProcessor commandProcessor)
+        public HomeController(IQueryProcessor queryProcessor)
         {
             this.queryProcessor = queryProcessor;
-            this.commandProcessor = commandProcessor;
         }
 
         public ActionResult Index()
@@ -33,7 +31,7 @@ namespace WH.RACEDAY.WEB.Controllers
         public ActionResult Details(int id)
         {
 
-            var raceDetails = this.queryProcessor.Execute<RaceDetails>(new GetRaceDetailsQuery { ID = id });
+            var raceDetails = this.queryProcessor.Execute<RaceDetailsViewModel>(new GetRaceDetailsQuery { ID = id });
 
             ViewData["raceDetails"] = raceDetails;
 

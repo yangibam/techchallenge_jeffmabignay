@@ -10,7 +10,7 @@ using WH.RACEDAY.DAL.INTERFACES;
 
 namespace WH.RACEDAY.RULE.QUERYHANDLER.CUSTOMER
 {
-    public class GetCustomerDetailsQueryHandler : IQueryHandler<GetCustomerDetailsQuery, CustomerList>
+    public class GetCustomerDetailsQueryHandler : IQueryHandler<GetCustomerDetailsQuery, CustomerListViewModel>
     {
         private readonly ICustomerRepository customerRepository;
         private readonly IRaceRepository raceRepository;
@@ -21,23 +21,23 @@ namespace WH.RACEDAY.RULE.QUERYHANDLER.CUSTOMER
             this.raceRepository = raceRepository;
         }
 
-        public CustomerList Handle(GetCustomerDetailsQuery query)
+        public CustomerListViewModel Handle(GetCustomerDetailsQuery query)
         {
             var bets = this.raceRepository.GetBet();
             var customers = this.customerRepository.GetCustomer();
 
-            CustomerList customerList = new CustomerList();
+            CustomerListViewModel customerList = new CustomerListViewModel();
 
             customerList.TotalBets = bets.Sum(b => b.Stake);
 
-            var customerDetails = new List<CustomerDetails>();
+            var customerDetails = new List<CustomerViewModel>();
 
             foreach(var customer in customers)
             {
                 var customerBets = bets.Where(b => b.CustomerId == customer.ID).Sum(s => s.Stake);
                 var atRisk = customerBets > 200 ? true : false;
 
-                customerDetails.Add(new CustomerDetails { ID = customer.ID, Name = customer.Name, Bet = customerBets, isAtRisk = atRisk });
+                customerDetails.Add(new CustomerViewModel { ID = customer.ID, Name = customer.Name, Bet = customerBets, isAtRisk = atRisk });
                 
             }
 
