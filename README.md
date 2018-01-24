@@ -7,6 +7,8 @@ ASP .NET MVC
 SimpleInjector
 RestSharp
 Bootstrap
+NUnit
+Moq
 
 The solution is compose of 2 projects
 1. ASP. NET MVC project for the WEB part
