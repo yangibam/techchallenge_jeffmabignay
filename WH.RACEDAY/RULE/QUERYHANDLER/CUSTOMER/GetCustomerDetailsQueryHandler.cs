@@ -26,24 +26,29 @@ namespace WH.RACEDAY.RULE.QUERYHANDLER.CUSTOMER
             var bets = this.raceRepository.GetBet();
             var customers = this.customerRepository.GetCustomer();
 
-            CustomerListViewModel customerList = new CustomerListViewModel();
-
-            customerList.TotalBets = bets.Sum(b => b.Stake);
-
-            var customerDetails = new List<CustomerViewModel>();
-
-            foreach(var customer in customers)
+            if (customers != null && customers.Count() > 0)
             {
-                var customerBets = bets.Where(b => b.CustomerId == customer.ID).Sum(s => s.Stake);
-                var atRisk = customerBets > 200 ? true : false;
+                CustomerListViewModel customerList = new CustomerListViewModel();
 
-                customerDetails.Add(new CustomerViewModel { ID = customer.ID, Name = customer.Name, Bet = customerBets, isAtRisk = atRisk });
-                
+                customerList.TotalBets = bets.Sum(b => b.Stake);
+
+                var customerDetails = new List<CustomerViewModel>();
+
+                foreach (var customer in customers)
+                {
+                    var customerBets = bets.Where(b => b.CustomerId == customer.ID).Sum(s => s.Stake);
+                    var atRisk = customerBets > 200 ? true : false;
+
+                    customerDetails.Add(new CustomerViewModel { ID = customer.ID, Name = customer.Name, Bet = customerBets, isAtRisk = atRisk });
+
+                }
+
+                customerList.Customers = customerDetails;
+
+                return customerList; 
             }
 
-            customerList.Customers = customerDetails;
-
-            return customerList;
+            return null;
         }
     }
 }

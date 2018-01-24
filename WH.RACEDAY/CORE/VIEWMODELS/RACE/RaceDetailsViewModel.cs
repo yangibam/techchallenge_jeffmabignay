@@ -13,6 +13,6 @@ namespace WH.RACEDAY.CORE.VIEWMODELS.RACE
         public string Start { get; set; }
         public string Status { get; set; }
         public int TotalBets { get; set; }
-        public IEnumerable<HorseViewModel> Horses { get; set; }
+        public List<HorseViewModel> Horses { get; set; }
     }
 }

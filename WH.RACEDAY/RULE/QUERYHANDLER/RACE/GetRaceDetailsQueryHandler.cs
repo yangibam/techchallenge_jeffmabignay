@@ -21,26 +21,32 @@ namespace WH.RACEDAY.RULE.QUERYHANDLER.RACE
         public RaceDetailsViewModel Handle(GetRaceDetailsQuery query)
         {
             var race = this.raceRepository.GetRace().Where(r => r.ID == query.ID).FirstOrDefault();
-            var bets = this.raceRepository.GetBet().Where(b => b.RaceId == query.ID);
 
-            var details = new RaceDetailsViewModel();
-
-            details.TotalBets = bets.Sum(b => b.Stake);
-
-            var horses = new List<HorseViewModel>();
-
-
-            foreach(var horse in race.Horses)
+            if (race != null)
             {
-                var horseBet = bets.Where(b => b.HorseId == horse.ID).Sum(s => s.Stake);
-                var payout = horseBet * horse.Odds;
+                var bets = this.raceRepository.GetBet().Where(b => b.RaceId == query.ID);
 
-                horses.Add(new HorseViewModel { ID = horse.ID, Name = horse.Name, Bets = horseBet, Odds = horse.Odds, Payout = payout });
+                var details = new RaceDetailsViewModel();
+
+                details.TotalBets = bets.Sum(b => b.Stake);
+
+                var horses = new List<HorseViewModel>();
+
+
+                foreach (var horse in race.Horses)
+                {
+                    var horseBet = bets.Where(b => b.HorseId == horse.ID).Sum(s => s.Stake);
+                    var payout = horseBet * horse.Odds;
+
+                    horses.Add(new HorseViewModel { ID = horse.ID, Name = horse.Name, Bets = horseBet, Odds = horse.Odds, Payout = payout });
+                }
+
+                details.Horses = horses;
+
+                return details; 
             }
 
-            details.Horses = horses;
-
-            return details;
+            return null;
         }
 
         

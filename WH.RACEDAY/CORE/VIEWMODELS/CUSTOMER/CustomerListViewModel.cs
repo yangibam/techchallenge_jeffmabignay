@@ -9,6 +9,6 @@ namespace WH.RACEDAY.CORE.VIEWMODELS.CUSTOMER
     public class CustomerListViewModel
     {
         public double TotalBets { get; set; }
-        public IEnumerable<CustomerViewModel> Customers { get; set; }
+        public List<CustomerViewModel> Customers { get; set; }
     }
 }

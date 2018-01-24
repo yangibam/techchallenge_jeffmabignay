@@ -8,7 +8,7 @@ using WH.RACEDAY.CORE.INTERFACES;
 
 namespace WH.RACEDAY.CORE.QUERIES.RACE
 {
-    public class GetRaceListQuery: IQuery<IEnumerable<Race>>
+    public class GetRaceListQuery: IQuery<List<Race>>
     {
         
     }

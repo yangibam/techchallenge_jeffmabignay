@@ -10,7 +10,7 @@ using WH.RACEDAY.DAL.INTERFACES;
 
 namespace WH.RACEDAY.RULE.QUERYHANDLER.RACE
 {
-    public class GetRaceListQueryHandler : IQueryHandler<GetRaceListQuery, IEnumerable<Race>>
+    public class GetRaceListQueryHandler : IQueryHandler<GetRaceListQuery, List<Race>>
     {
         private readonly IRaceRepository raceRepository;
 
@@ -19,9 +19,11 @@ namespace WH.RACEDAY.RULE.QUERYHANDLER.RACE
             this.raceRepository = raceRepository;
         }
 
-        public IEnumerable<Race> Handle(GetRaceListQuery query)
+        public List<Race> Handle(GetRaceListQuery query)
         {
-            return this.raceRepository.GetRace();
+            var races = this.raceRepository.GetRace();
+
+            return races == null ? new List<Race>() : races.ToList();
         }
     }
 }

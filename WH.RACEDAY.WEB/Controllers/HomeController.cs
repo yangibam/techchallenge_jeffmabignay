@@ -21,7 +21,7 @@ namespace WH.RACEDAY.WEB.Controllers
 
         public ActionResult Index()
         {
-            var races = this.queryProcessor.Execute<IEnumerable<Race>>(new GetRaceListQuery());
+            var races = this.queryProcessor.Execute<List<Race>>(new GetRaceListQuery());
 
             ViewData["races"] = races;            
 
